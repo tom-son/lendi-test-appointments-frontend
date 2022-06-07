@@ -1,14 +1,23 @@
 import React, {useState} from "react";
 import BrokerAppointment from "../../../../handlers/BrokerAppointment";
+import Appointment from "../../../../types/Appointment";
+import styled from "styled-components";
 
 export interface BrokerProps {
   broker: BrokerAppointment;
+  selectAppointment: (appointment: Appointment) => void;
 }
+
+const AppointmentListItem = styled.li`
+  cursor: pointer;
+`;
 
 const Broker = (props: BrokerProps) => {
   const [appointmentVisibility, setAppointmentVisibility] = useState(true);
   const appointmentDateListItems = props.broker.appointments.map(appointment =>
-    <li key={appointment.id}>{appointment.date}</li>);
+    <AppointmentListItem key={appointment.id} onClick={() => props.selectAppointment(appointment)}>
+      {appointment.date}
+    </AppointmentListItem>);
 
   const toggleAppointmentVisibility = () => {
     setAppointmentVisibility(!appointmentVisibility);

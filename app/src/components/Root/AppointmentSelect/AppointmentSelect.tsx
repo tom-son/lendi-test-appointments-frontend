@@ -6,6 +6,8 @@ import {useEffect, useState} from "react";
 import BrokerAppointment from "../../../handlers/BrokerAppointment";
 import BrokersHandler from "../../../handlers/BrokersHandler";
 import AppointmentsHandler from "../../../handlers/AppointmentsHandler";
+import AppointmentDetailsPanel from "./AppointmentDetailsPanel";
+import Appointment from "../../../types/Appointment";
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,7 +23,8 @@ const Heading = styled.strong.attrs({ role: "heading", level: 2 })`
 `;
 
 const AppointmentSelect = () => {
-  const [brokerAppointments, setBrokerAppointments] = useState<BrokerAppointment[]>([])
+  const [brokerAppointments, setBrokerAppointments] = useState<BrokerAppointment[]>([]);
+  const [appointmentSelected, setAppointmentSelected] = useState<Appointment>();
 
   useEffect(() => {
     const aggregateAndSetBrokerAppointments = async () => {
@@ -48,13 +51,12 @@ const AppointmentSelect = () => {
         <Heading>Amazing site</Heading>
         <ul>
           {brokerAppointments.map((broker) => (
-            <Broker key={broker.id} broker={broker} />
+            <Broker key={broker.id} broker={broker} selectAppointment={setAppointmentSelected} />
           ))}
         </ul>
       </SideBar>
       <div>
-        <Heading>Appointment details</Heading>
-        TODO: get appointment details when clicking on one from the left side
+        {appointmentSelected && <AppointmentDetailsPanel appointment={appointmentSelected}/>}
       </div>
     </Wrapper>
   );
