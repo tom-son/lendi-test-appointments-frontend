@@ -15,18 +15,24 @@ const Broker = (props: BrokerProps) => {
   }
 
   const appointmentVisibilityButtonName = appointmentVisibility ? "Hide appointments" : "Show appointments";
-
+  const appointmentList = (appointmentDateListItems.length > 0)
+  ? (
+    <>
+      <button onClick={toggleAppointmentVisibility} type="button" >{appointmentVisibilityButtonName}</button>
+      {appointmentVisibility &&
+          <ul>
+            {appointmentDateListItems}
+          </ul>
+      }
+    </>
+  )
+  : <div>No appointments.</div>;
   return (
     <li>
       {props.broker.name}
       <br />
       appointments:
-      <button onClick={toggleAppointmentVisibility} type="button" >{appointmentVisibilityButtonName}</button>
-      {appointmentVisibility &&
-        <ul>
-          {appointmentDateListItems}
-        </ul>
-      }
+      {appointmentList}
     </li>
   );
 };
