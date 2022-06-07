@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import BrokerComponent from "./Broker";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import BrokerAppointment from "../../../types/BrokerAppointment";
 import AppointmentDetailsPanel from "./AppointmentDetailsPanel";
 import Appointment from "../../../types/Appointment";
 import Broker from "../../../types/Broker";
+import {ComponentsContext} from "../../../stores/ComponentsStore";
 
 interface AppointmentSelectProps {
   appointments: Appointment[];
@@ -26,7 +27,7 @@ const Heading = styled.strong.attrs({ role: "heading", level: 2 })`
 
 const AppointmentSelect = (props: AppointmentSelectProps) => {
   const [brokerAppointments, setBrokerAppointments] = useState<BrokerAppointment[]>([]);
-  const [appointmentSelected, setAppointmentSelected] = useState<Appointment>();
+  const componentsContext = useContext(ComponentsContext);
 
   useEffect(() => {
     const aggregateAndSetBrokerAppointments = async () => {
@@ -44,20 +45,20 @@ const AppointmentSelect = (props: AppointmentSelectProps) => {
 
     aggregateAndSetBrokerAppointments();
   }, []);
-
-
+  
   return (
     <Wrapper>
       <SideBar>
         <Heading>Amazing site</Heading>
         <ul>
           {brokerAppointments.map((broker) => (
-            <BrokerComponent key={broker.id} broker={broker} selectAppointment={setAppointmentSelected} />
+            <BrokerComponent key={broker.id} broker={broker}/>
           ))}
         </ul>
       </SideBar>
       <div>
-        {appointmentSelected && <AppointmentDetailsPanel appointment={appointmentSelected}/>}
+        {componentsContext.appointmentSelected &&
+            <AppointmentDetailsPanel appointment={componentsContext.appointmentSelected}/>}
       </div>
     </Wrapper>
   );

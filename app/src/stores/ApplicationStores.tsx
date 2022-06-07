@@ -1,5 +1,6 @@
 import EntitiesStore from "./EntitiesStore";
 import React from "react";
+import ComponentsStore from "./ComponentsStore";
 
 /**
  * Global store for application
@@ -11,7 +12,9 @@ interface ApplicationStoresProps {
 const ApplicationStores = (props: ApplicationStoresProps) => {
   return (
     <EntitiesStore>
-      {props.children}
+      <ComponentsStore>
+        {props.children}
+      </ComponentsStore>
     </EntitiesStore>
   );
 }

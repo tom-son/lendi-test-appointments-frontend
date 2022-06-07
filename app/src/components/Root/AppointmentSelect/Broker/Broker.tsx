@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import BrokerAppointment from "../../../../types/BrokerAppointment";
-import Appointment from "../../../../types/Appointment";
 import styled from "styled-components";
+import {ComponentsContext} from "../../../../stores/ComponentsStore";
 
 export interface BrokerProps {
   broker: BrokerAppointment;
-  selectAppointment: (appointment: Appointment) => void;
 }
 
 const AppointmentListItem = styled.li`
@@ -14,8 +13,10 @@ const AppointmentListItem = styled.li`
 
 const Broker = (props: BrokerProps) => {
   const [appointmentVisibility, setAppointmentVisibility] = useState(true);
+  const componentsContext = useContext(ComponentsContext);
+
   const appointmentDateListItems = props.broker.appointments.map(appointment =>
-    <AppointmentListItem key={appointment.id} onClick={() => props.selectAppointment(appointment)}>
+    <AppointmentListItem key={appointment.id} onClick={() => componentsContext.setAppointmentSelected(appointment)}>
       {appointment.date}
     </AppointmentListItem>);
 
