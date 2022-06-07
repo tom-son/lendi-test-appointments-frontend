@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import Navigation from "./Navigation";
 import AppointmentSelect from "./AppointmentSelect";
+import ApplicationStores from "../../stores/ApplicationStores";
+import AppointmentSelectEntities from "./AppointmentSelect/ApplicationSelectEntities";
 
 const Wrapper = styled.div`
   background-color: #fcfcfc;
@@ -28,13 +30,15 @@ const Heading = styled.strong.attrs({ role: "heading", level: 1 })`
 
 const Root = () => {
   return (
-    <Wrapper>
-      <Navigation />
-      <Content>
-        <Heading>Amazing site</Heading>
-        <AppointmentSelect />
-      </Content>
-    </Wrapper>
+    <ApplicationStores>
+      <Wrapper>
+        <Navigation />
+        <Content>
+          <Heading>Amazing site</Heading>
+          <AppointmentSelectEntities />
+        </Content>
+      </Wrapper>
+    </ApplicationStores>
   );
 };
 
