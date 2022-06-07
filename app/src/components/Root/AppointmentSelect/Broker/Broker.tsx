@@ -1,11 +1,8 @@
 import React from "react";
+import BrokerAppointment from "../../../../handlers/BrokerAppointment";
 
 export interface BrokerProps {
-  broker: {
-    name: string;
-    id: number;
-    appointments: { id: number; brokerId: number; date: string }[];
-  };
+  broker: BrokerAppointment;
 }
 
 const Broker = (broker: BrokerProps) => {

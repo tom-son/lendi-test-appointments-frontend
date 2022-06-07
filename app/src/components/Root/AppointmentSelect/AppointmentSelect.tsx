@@ -2,6 +2,10 @@ import axios from "axios";
 import styled from "styled-components";
 
 import Broker from "./Broker";
+import {useEffect, useState} from "react";
+import BrokerAppointment from "../../../handlers/BrokerAppointment";
+import BrokersHandler from "../../../handlers/BrokersHandler";
+import AppointmentsHandler from "../../../handlers/AppointmentsHandler";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,29 +20,36 @@ const Heading = styled.strong.attrs({ role: "heading", level: 2 })`
   font-size: 20px;
 `;
 
-type BrokerAppointments = {
-  id: number;
-  name: string;
-  appointments: { id: number; brokerId: number; date: string }[];
-}[];
-
 const AppointmentSelect = () => {
-  axios
-    .get("http://localhost:8080/brokers")
-    .then(({ data }) => console.log(data));
-  axios
-    .get("http://localhost:8080/appointments")
-    .then(({ data }) => console.log(data));
+  const [brokerAppointments, setBrokerAppointments] = useState<BrokerAppointment[]>([])
+
+  useEffect(() => {
+    const aggregateAndSetBrokerAppointments = async () => {
+      const brokers = await BrokersHandler.getBrokers();
+      const appointments = await AppointmentsHandler.getAppointments();
+      const brokerAppointmentAggregates = brokers.map(broker => {
+        const appointmentsForBroker = appointments.filter(appointment => appointment.brokerId === broker.id);
+        return {
+          ...broker,
+          appointments: appointmentsForBroker
+        };
+      });
+
+      setBrokerAppointments(brokerAppointmentAggregates);
+    }
+
+    aggregateAndSetBrokerAppointments();
+  }, []);
+
 
   return (
     <Wrapper>
       <SideBar>
         <Heading>Amazing site</Heading>
-        TODO: populate brokers
         <ul>
-          {/* {brokerAppointments.map((broker) => (
+          {brokerAppointments.map((broker) => (
             <Broker key={broker.id} broker={broker} />
-          ))} */}
+          ))}
         </ul>
       </SideBar>
       <div>
