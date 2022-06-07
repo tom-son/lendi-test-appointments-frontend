@@ -1,11 +1,15 @@
 import styled from "styled-components";
-import Broker from "./Broker";
+import BrokerComponent from "./Broker";
 import {useEffect, useState} from "react";
 import BrokerAppointment from "../../../types/BrokerAppointment";
-import BrokersHandler from "../../../handlers/BrokersHandler";
-import AppointmentsHandler from "../../../handlers/AppointmentsHandler";
 import AppointmentDetailsPanel from "./AppointmentDetailsPanel";
 import Appointment from "../../../types/Appointment";
+import Broker from "../../../types/Broker";
+
+interface AppointmentSelectProps {
+  appointments: Appointment[];
+  brokers: Broker[];
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,16 +24,15 @@ const Heading = styled.strong.attrs({ role: "heading", level: 2 })`
   font-size: 20px;
 `;
 
-const AppointmentSelect = () => {
+const AppointmentSelect = (props: AppointmentSelectProps) => {
   const [brokerAppointments, setBrokerAppointments] = useState<BrokerAppointment[]>([]);
   const [appointmentSelected, setAppointmentSelected] = useState<Appointment>();
 
   useEffect(() => {
     const aggregateAndSetBrokerAppointments = async () => {
-      const brokers = await BrokersHandler.getBrokers();
-      const appointments = await AppointmentsHandler.getAppointments();
-      const brokerAppointmentAggregates = brokers.map(broker => {
-        const appointmentsForBroker = appointments.filter(appointment => appointment.brokerId === broker.id);
+      const brokerAppointmentAggregates = props.brokers.map(broker => {
+        const appointmentsForBroker = props.appointments.filter(appointment =>
+          appointment.brokerId === broker.id);
         return {
           ...broker,
           appointments: appointmentsForBroker
@@ -49,7 +52,7 @@ const AppointmentSelect = () => {
         <Heading>Amazing site</Heading>
         <ul>
           {brokerAppointments.map((broker) => (
-            <Broker key={broker.id} broker={broker} selectAppointment={setAppointmentSelected} />
+            <BrokerComponent key={broker.id} broker={broker} selectAppointment={setAppointmentSelected} />
           ))}
         </ul>
       </SideBar>
