@@ -6,7 +6,8 @@ export interface BrokerProps {
 }
 
 const Broker = (props: BrokerProps) => {
-  const appointmentDateListItems = props.broker.appointments.map(appointment => <li>{appointment.date}</li>);
+  const appointmentDateListItems = props.broker.appointments.map(appointment =>
+    <li key={appointment.id}>{appointment.date}</li>);
 
   return (
     <li>
