@@ -5,15 +5,17 @@ export interface BrokerProps {
   broker: BrokerAppointment;
 }
 
-const Broker = (broker: BrokerProps) => {
+const Broker = (props: BrokerProps) => {
+  const appointmentDateListItems = props.broker.appointments.map(appointment => <li>{appointment.date}</li>);
+
   return (
     <li>
-      [broker name]
+      {props.broker.name}
       <br />
       appointments:
       <button>Hide appointments</button>
       <ul>
-        <li>[appointment date]</li>
+        {appointmentDateListItems}
       </ul>
     </li>
   );
