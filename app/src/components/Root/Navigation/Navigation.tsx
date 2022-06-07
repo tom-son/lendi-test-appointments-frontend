@@ -34,7 +34,7 @@ const Navigation = () => {
     return (
       <Wrapper>
         <strong>
-          Currently selected appointment: {componentContext.appointmentSelected?.date} with {brokerForAppointment?.name}
+          Currently selected appointment: {componentContext.appointmentSelected.date} with {brokerForAppointment.name}
         </strong>
         <strong>Welcome to Lendi</strong>
       </Wrapper>
