@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import BrokerAppointment from "../../../../handlers/BrokerAppointment";
+import BrokerAppointment from "../../../../types/BrokerAppointment";
 import Appointment from "../../../../types/Appointment";
 import styled from "styled-components";
 

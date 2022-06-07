@@ -1,5 +1,5 @@
-import Broker from "../types/Broker";
-import Appointment from "../types/Appointment";
+import Broker from "./Broker";
+import Appointment from "./Appointment";
 
 interface BrokerAppointment extends Broker {
   appointments: Appointment[];

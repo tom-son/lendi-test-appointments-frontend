@@ -1,9 +1,7 @@
-import axios from "axios";
 import styled from "styled-components";
-
 import Broker from "./Broker";
 import {useEffect, useState} from "react";
-import BrokerAppointment from "../../../handlers/BrokerAppointment";
+import BrokerAppointment from "../../../types/BrokerAppointment";
 import BrokersHandler from "../../../handlers/BrokersHandler";
 import AppointmentsHandler from "../../../handlers/AppointmentsHandler";
 import AppointmentDetailsPanel from "./AppointmentDetailsPanel";
