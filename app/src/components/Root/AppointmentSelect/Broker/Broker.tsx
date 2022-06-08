@@ -29,15 +29,15 @@ const Broker = (props: BrokerProps) => {
     : <button data-testid="broker-show-appointments-button" onClick={toggleAppointmentVisibility} type="button" >Show appointments</button>;
 
   const appointmentList = (appointmentDateListItems.length > 0)
-  ? (
-    <>
+  ? <>
       {appointmentVisibility &&
+        <>
+          appointments:
           <ul data-testid="broker-appointments-list">
-            {appointmentDateListItems}
+           {appointmentDateListItems}
           </ul>
-      }
+        </>}
     </>
-  )
   : <div>No appointments.</div>;
 
   return (
@@ -45,7 +45,6 @@ const Broker = (props: BrokerProps) => {
       {props.broker.name}
       <br />
       {(appointmentDateListItems.length > 0) && appointmentsVisibilityToggler}
-      appointments:
       {appointmentList}
     </li>
   );
