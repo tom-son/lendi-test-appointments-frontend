@@ -15,7 +15,7 @@ export default router;
 
 router.get("/", (req, res) => {
   if (req.query.sortByDate) {
-    res.send(SortUtility.sortAppointmentsByDate(appointments));
+    res.send(SortUtility.sortAppointmentsByDateDescending(appointments));
     return;
   }
   if (req.query.sortByBroker) {

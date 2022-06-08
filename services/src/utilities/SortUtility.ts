@@ -30,8 +30,7 @@ class SortUtility {
     }
   }
 
-  // TODO thompson - give a clearer name
-  public static sortAppointmentsByDate(appointments: Appointment[]): Appointment[] {
+  public static sortAppointmentsByDateDescending(appointments: Appointment[]): Appointment[] {
     return [...appointments].sort((appointmentA: Appointment, appointmentB: Appointment) => {
       return SortUtility.compareDescending(
         DateUtility.enAULocaleToDateISO(appointmentA.date),
