@@ -1,4 +1,5 @@
 import { Router } from "express";
+import SortUtility from "../utilities/SortUtility";
 
 const appointments = [
   { id: 1, brokerId: 1, date: "15/10/2021" },
@@ -13,5 +14,10 @@ const router = Router();
 export default router;
 
 router.get("/", (req, res) => {
+  if (req.query.sortByDate) {
+    res.send(SortUtility.sortAppointmentsByDate(appointments));
+    return;
+  }
+
   res.send(appointments);
 });
