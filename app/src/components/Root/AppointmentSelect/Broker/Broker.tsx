@@ -44,7 +44,7 @@ const Broker = (props: BrokerProps) => {
     <li>
       {props.broker.name}
       <br />
-      {appointmentsVisibilityToggler}
+      {(appointmentDateListItems.length > 0) && appointmentsVisibilityToggler}
       appointments:
       {appointmentList}
     </li>
