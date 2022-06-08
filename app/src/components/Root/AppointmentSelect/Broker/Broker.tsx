@@ -24,23 +24,27 @@ const Broker = (props: BrokerProps) => {
     setAppointmentVisibility(!appointmentVisibility);
   }
 
-  const appointmentVisibilityButtonName = appointmentVisibility ? "Hide appointments" : "Show appointments";
+  const appointmentsVisibilityToggler = appointmentVisibility
+    ? <button data-testid="broker-hide-appointments-button" onClick={toggleAppointmentVisibility} type="button" >Hide appointments</button>
+    : <button data-testid="broker-show-appointments-button" onClick={toggleAppointmentVisibility} type="button" >Show appointments</button>;
+
   const appointmentList = (appointmentDateListItems.length > 0)
   ? (
     <>
-      <button onClick={toggleAppointmentVisibility} type="button" >{appointmentVisibilityButtonName}</button>
       {appointmentVisibility &&
-          <ul>
+          <ul data-testid="broker-appointments-list">
             {appointmentDateListItems}
           </ul>
       }
     </>
   )
   : <div>No appointments.</div>;
+
   return (
     <li>
       {props.broker.name}
       <br />
+      {appointmentsVisibilityToggler}
       appointments:
       {appointmentList}
     </li>
