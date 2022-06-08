@@ -18,6 +18,10 @@ router.get("/", (req, res) => {
     res.send(SortUtility.sortAppointmentsByDate(appointments));
     return;
   }
+  if (req.query.sortByBroker) {
+    res.send(SortUtility.sortAppointmentsByBrokerIdAscending(appointments));
+    return;
+  }
 
   res.send(appointments);
 });
