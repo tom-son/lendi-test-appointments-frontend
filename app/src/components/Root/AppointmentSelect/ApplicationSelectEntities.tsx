@@ -3,7 +3,7 @@ import {useContext} from "react";
 import {EntitiesContext} from "../../../stores/EntitiesStore";
 
 /**
- * Load entities for AppointmentSelect
+ * Load entity data for AppointmentSelect
  */
 const AppointmentSelectEntities = () => {
   const entitiesContext = useContext(EntitiesContext);
